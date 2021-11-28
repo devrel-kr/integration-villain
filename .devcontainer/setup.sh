@@ -7,6 +7,7 @@ git config --global pull.rebase false
 git config --global core.autocrlf false
 
 ## Install node.js 16 LTS
+sudo rm ~/.npmrc
 source ~/.nvm/nvm.sh
 nvm install --lts Gallium
 
