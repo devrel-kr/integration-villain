@@ -1,3 +1,6 @@
+## Configure git
+git config --global pull.rebase false
+
 ## Instsall node 16.* LTS
 nvm install --lts Gallium
 
