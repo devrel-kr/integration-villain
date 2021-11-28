@@ -26,10 +26,6 @@
     "files.watcherExclude": {
       "**/target/**": true
     },
-    "files.exclude": {
-      "**/CODE_OF_CONDUCT.md": true,
-      "**/LICENSE": true
-    },
     "terminal.integrated.profile.linux": "/usr/bin/zsh",
   },
   "remoteUser": "codespace",

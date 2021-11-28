@@ -7,7 +7,7 @@ git config --global pull.rebase false
 git config --global core.autocrlf false
 
 ## Install node.js 16 LTS
-nvm install --lts Gallium
+sudo nvm install --lts Gallium
 
 ## Install .NET
 sudo wget https://packages.microsoft.com/config/ubuntu/20.10/packages-microsoft-prod.deb -O packages-microsoft-prod.deb
