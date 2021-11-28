@@ -16,3 +16,4 @@ sudo git config --global pull.rebase false
 
 ## Enable local HTTPS for .NET
 sudo dotnet dev-certs https --trust
+
