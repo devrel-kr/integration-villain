@@ -3,8 +3,8 @@ sudo apt-get update && \
 sudo apt-get install -y dos2unix
 
 ## Configure git
-sudo git config --global pull.rebase false
-sudo git config --global core.autocrlf false
+git config --global pull.rebase false
+git config --global core.autocrlf false
 
 ## Install .NET 6
 wget https://packages.microsoft.com/config/ubuntu/20.10/packages-microsoft-prod.deb -O packages-microsoft-prod.deb
@@ -23,4 +23,4 @@ sudo apt-get install -y dotnet-sdk-6.0
 # sudo apt-get install -y azure-functions-core-tools-4
 
 ## Enable local HTTPS for .NET
-sudo dotnet dev-certs https --trust
+dotnet dev-certs https --trust
