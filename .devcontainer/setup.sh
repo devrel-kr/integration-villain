@@ -1,9 +1,6 @@
 ## Configure git
 git config --global pull.rebase false
 
-## Instsall node 16.* LTS
-nvm install --lts Gallium
-
 ## Install .NET 6
 wget https://packages.microsoft.com/config/ubuntu/20.04/packages-microsoft-prod.deb -O packages-microsoft-prod.deb
 sudo dpkg -i packages-microsoft-prod.deb
