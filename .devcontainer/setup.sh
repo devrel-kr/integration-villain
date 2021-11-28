@@ -1,10 +1,10 @@
 ## Configure git
-git config --global pull.rebase false
+sudo git config --global pull.rebase false
 
 ## Install .NET 6
-wget https://packages.microsoft.com/config/ubuntu/20.04/packages-microsoft-prod.deb -O packages-microsoft-prod.deb
+sudo wget https://packages.microsoft.com/config/ubuntu/20.04/packages-microsoft-prod.deb -O packages-microsoft-prod.deb
 sudo dpkg -i packages-microsoft-prod.deb
-rm packages-microsoft-prod.deb
+sudo rm packages-microsoft-prod.deb
 
 sudo apt-get update; \
   sudo apt-get install -y apt-transport-https && \
@@ -19,4 +19,4 @@ sudo apt-get update; \
 # sudo apt-get install -y azure-functions-core-tools-4
 
 ## Enable local HTTPS for .NET
-dotnet dev-certs https --trust
+sudo dotnet dev-certs https --trust
