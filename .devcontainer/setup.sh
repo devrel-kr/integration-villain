@@ -6,13 +6,13 @@ sudo apt-get install -y dos2unix
 git config --global pull.rebase false
 git config --global core.autocrlf false
 
-## Install .NET 6
-wget https://packages.microsoft.com/config/ubuntu/20.10/packages-microsoft-prod.deb -O packages-microsoft-prod.deb
+## Install .NET
+sudo wget https://packages.microsoft.com/config/ubuntu/20.10/packages-microsoft-prod.deb -O packages-microsoft-prod.deb
 sudo dpkg -i packages-microsoft-prod.deb
-rm packages-microsoft-prod.deb
+sudo rm packages-microsoft-prod.deb
 
 sudo apt-get update && \
-sudo apt-get install -y dotnet-sdk-6.0
+sudo apt-get install -y dotnet-sdk-2.1 dotnet-sdk-3.1 dotnet-sdk-5.0 dotnet-sdk-6.0
 
 ## Install Azure Functions Core Tools v4
 # curl https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor > microsoft.gpg
