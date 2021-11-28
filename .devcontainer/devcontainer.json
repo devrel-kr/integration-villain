@@ -33,7 +33,7 @@
 		},
 		"terminal.integrated.profile.linux": "/usr/bin/zsh",
 	},
-	// "remoteUser": "codespace",
+	"remoteUser": "codespace",
 	"overrideCommand": false,
 	"mounts": ["source=codespaces-linux-var-lib-docker,target=/var/lib/docker,type=volume"],
 	"runArgs": [
