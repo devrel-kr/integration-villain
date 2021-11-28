@@ -5,7 +5,12 @@
 
 ## 전체 아키텍처 다이어그램 ##
 
-TBD
+![전체 아키텍처 다이어그램](./assets/architecture.png)
+
+
+## 시퀀스 다이어그램 ##
+
+![시퀀스 다이어그램](./out/assets/workflow/workflow.png)
 
 
 ## 시작하기 ##

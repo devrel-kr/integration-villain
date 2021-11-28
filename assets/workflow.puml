@@ -1,0 +1,9 @@
+@startuml
+participant "Microsoft Teams" as teams
+participant "Blazor App" as blazor
+participant "Api App" as api
+participant "Monitor App" as monitor
+participant "K8S Cluster" as aks
+
+
+@enduml
