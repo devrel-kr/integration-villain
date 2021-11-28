@@ -1,5 +1,6 @@
 ## Configure git
 sudo git config --global pull.rebase false
+sudo git config --global core.autocrlf false
 
 ## Install .NET 6
 # sudo wget https://packages.microsoft.com/config/ubuntu/20.04/packages-microsoft-prod.deb -O packages-microsoft-prod.deb && \
