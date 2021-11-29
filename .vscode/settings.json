@@ -1,5 +1,6 @@
 {
   "azureFunctions.deploySubpath": "wrapperapp/Wrapper.ApiApp/bin/Release/net6.0/publish",
+  "azureFunctions.projectSubpath": "wrapperapp/Wrapper.ApiApp",
   "azureFunctions.projectLanguage": "C#",
   "azureFunctions.projectRuntime": "~4",
   "debug.internalConsoleOptions": "neverOpen",
