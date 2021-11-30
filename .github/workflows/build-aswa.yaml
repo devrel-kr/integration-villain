@@ -1,0 +1,60 @@
+name: Azure Static Web Apps
+
+on:
+  workflow_call:
+    inputs:
+      event_name:
+        required: true
+        type: string
+      event_action:
+        required: true
+        type: string
+      app_location:
+        required: true
+        type: string
+      api_location:
+        required: true
+        type: string
+      output_location:
+        required: true
+        type: string
+    secrets:
+      github_token:
+        required: true
+      aswa_token:
+        required: true
+
+jobs:
+  build_and_deploy_job:
+    if: inputs.event_name == 'push' || (inputs.event_name == 'pull_request' && inputs.event_action != 'closed')
+    runs-on: ubuntu-latest
+    name: Build and Deploy Job
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          submodules: true
+      - name: Build And Deploy
+        id: builddeploy
+        uses: Azure/static-web-apps-deploy@v1
+        with:
+          azure_static_web_apps_api_token: ${{ secrets.aswa_token }}
+          repo_token: ${{ secrets.github_token }} # Used for Github integrations (i.e. PR comments)
+          action: "upload"
+          ###### Repository/Build Configurations - These values can be configured to match your app requirements. ######
+          # For more information regarding Static Web App workflow configurations, please visit: https://aka.ms/swaworkflowconfig
+          app_location: ${{ inputs.app_location }} # App source code path
+          api_location: ${{ inputs.api_location }} # Api source code path - optional
+          output_location: ${{ inputs.output_location }} # Built app content directory - optional
+          ###### End of Repository/Build Configurations ######
+
+  close_pull_request_job:
+    if: inputs.event_name == 'pull_request' && inputs.event_action == 'closed'
+    runs-on: ubuntu-latest
+    name: Close Pull Request Job
+    steps:
+      - name: Close Pull Request
+        id: closepullrequest
+        uses: Azure/static-web-apps-deploy@v1
+        with:
+          azure_static_web_apps_api_token: ${{ secrets.aswa_token }}
+          action: "close"
