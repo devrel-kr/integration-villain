@@ -5,13 +5,13 @@ on:
     branches:
     - main
     paths:
-    - "wrapperapp/*"
+    - "wrapperapp/**"
   pull_request:
     types: [opened, synchronize, reopened, closed]
     branches:
     - main
     paths:
-    - "wrapperapp/*"
+    - "wrapperapp/**"
 
 jobs:
   call_aswa_flow:
