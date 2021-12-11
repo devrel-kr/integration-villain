@@ -1,0 +1,12 @@
+{
+  "IsEncrypted": false,
+  "Values": {
+    "AzureWebJobsStorage": "UseDevelopmentStorage=true",
+    "FUNCTIONS_WORKER_RUNTIME": "dotnet",
+
+    "Monitoring__BaseUrl": "https://fncapp-integrationvillain-monitoring-krc.azurewebsites.net/"
+  },
+  "Host": {
+    "CORS": "*"
+  }
+}
