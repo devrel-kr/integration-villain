@@ -1,0 +1,55 @@
+swagger: '2.0'
+info:
+  title: integration-villain-monitorapp-openapi
+  description: Integration Villain project - monitorapp Open API
+  version: v1
+host: DRAFT-integration-villain-monitorapp-openapi.azurewebsites.net
+schemes:
+  - https
+consumes:
+  - application/json
+produces:
+  - application/json
+paths:
+  /api/AKSClusterStatus:
+    get:
+      tags:
+        - AKSClusterStatus
+      operationId: AKSClusterStatus_Get
+      summary: Gets a AKS managed cluster status.
+      parameters:
+        - $ref: '#/parameters/AKSClusterNameParameter'
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/PowerState'
+definitions:
+  PowerState:
+    description: Describes the Power State of the cluster
+    properties:
+      code:
+        type: string
+        description: Tells whether the cluster is Running or Stopped
+        enum:
+          - Running
+          - Stopped
+        x-ms-enum:
+          name: code
+          modelAsString: true
+          values:
+            - value: Running
+              description: The cluster is running.
+            - value: Stopped
+              description: The cluster is stopped.
+parameters:
+  AKSClusterNameParameter:
+    name: name
+    in: path
+    required: true
+    type: string
+    minLength: 1
+    maxLength: 63
+    pattern: '^[a-zA-Z0-9]$|^[a-zA-Z0-9][-_a-zA-Z0-9]{0,61}[a-zA-Z0-9]$'
+    description: The name of the AKS managed cluster resource.
+    x-ms-parameter-location: method
