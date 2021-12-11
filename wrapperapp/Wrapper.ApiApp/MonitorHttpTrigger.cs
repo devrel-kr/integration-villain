@@ -53,7 +53,7 @@ namespace Wrapper.ApiApp
             this._logger.LogInformation("C# HTTP trigger function processed a request.");
 
             var result = await this._monitor.GetAsync(name).ConfigureAwait(false);
-            var res = new MonitorResponse() { Name = name, PowerState = result };
+            var res = new MonitorResponse() { Name = name, PowerState = result.Code.ToString() };
 
             return new OkObjectResult(res);
         }

@@ -1,0 +1,60 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "OpenAPI Document on Azure Functions",
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": "http://localhost:7071/api"
+    }
+  ],
+  "paths": {
+    "/status/{name}": {
+      "get": {
+        "tags": [
+          "status"
+        ],
+        "operationId": "Status.Get",
+        "parameters": [
+          {
+            "name": "name",
+            "in": "path",
+            "description": "The **Name** parameter",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The current power status",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/monitorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "monitorResponse": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "powerState": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  }
+}

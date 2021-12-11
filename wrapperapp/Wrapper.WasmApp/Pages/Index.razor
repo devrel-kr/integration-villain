@@ -1,9 +1,21 @@
-﻿@page "/"
+@page "/"
 
-<PageTitle>Index</PageTitle>
+<PageTitle>AKS 클러스터 모니터링 대시보드 - 합치기빌런</PageTitle>
 
-<h1>Hello, world!</h1>
+<h1>AKS 클러스터 모니터링 대시보드 - 합치기빌런</h1>
 
-Welcome to your new app.
-
-<SurveyPrompt Title="How is Blazor working for you?" />
+<div class="container">
+    <div class="row mb-3">
+        <div class="col-auto">
+            <input type="text" class="form-control form-control-lg" id="aks-cluster-name" @bind="AksClusterName" placeholder="AKS 클러스터 이름" aria-label="AKS Cluster Name">
+        </div>
+        <div class="col-auto">
+            <button type="button" class="btn btn-info" @onclick="CheckAksClusterStatusAsync">확인</button>
+        </div>
+    </div>
+    <div class="row mb-3">
+        <div class="col-auto">
+            현재 AKS 클러스터 @AksClusterName 의 상태는 @AksClusterStatus 입니다.
+        </div>
+    </div>
+</div>
