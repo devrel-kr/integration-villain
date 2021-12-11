@@ -13,6 +13,7 @@ using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
 
 using Wrapper.ApiApp.Clients;
+using Wrapper.ApiApp.Models;
 
 namespace Wrapper.ApiApp
 {
@@ -44,7 +45,7 @@ namespace Wrapper.ApiApp
         [FunctionName(nameof(MonitorHttpTrigger.GetStatusAsync))]
         [OpenApiOperation(operationId: "Status.Get", tags: new[] { "status" })]
         [OpenApiParameter(name: "name", In = ParameterLocation.Path, Required = true, Type = typeof(string), Description = "The **Name** parameter")]
-        [OpenApiResponseWithBody(statusCode: HttpStatusCode.OK, contentType: ContentTypes.ApplicationJson, bodyType: typeof(PowerState), Description = "The current power status")]
+        [OpenApiResponseWithBody(statusCode: HttpStatusCode.OK, contentType: ContentTypes.ApplicationJson, bodyType: typeof(MonitorResponse), Description = "The current power status")]
         public async Task<IActionResult> GetStatusAsync(
             [HttpTrigger(AuthorizationLevel.Anonymous, HttpVerbs.GET, Route = "status/{name}")] HttpRequest req,
             string name)
@@ -52,8 +53,9 @@ namespace Wrapper.ApiApp
             this._logger.LogInformation("C# HTTP trigger function processed a request.");
 
             var result = await this._monitor.GetAsync(name).ConfigureAwait(false);
+            var res = new MonitorResponse() { Name = name, PowerState = result };
 
-            return new OkObjectResult(result);
+            return new OkObjectResult(res);
         }
     }
 }
