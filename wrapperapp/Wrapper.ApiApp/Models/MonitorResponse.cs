@@ -15,6 +15,6 @@ namespace Wrapper.ApiApp.Models
         /// <summary>
         /// Gets or sets the AKS cluster power status.
         /// </summary>
-        public virtual PowerState PowerState { get; set; }
+        public virtual string PowerState { get; set; }
     }
 }

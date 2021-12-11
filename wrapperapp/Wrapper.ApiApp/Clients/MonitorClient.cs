@@ -1,3 +1,4 @@
+using System;
 using System.Net.Http;
 using System.Threading.Tasks;
 
@@ -38,6 +39,8 @@ namespace Wrapper.ApiApp.Clients
     /// </summary>
     public class FakeMonitorClient : IMonitorClient
     {
+        private static readonly Random random = new Random();
+
         /// <summary>
         /// Initializes a new instance of the <see cref="FakeMonitorClient"/> class.
         /// </summary>
@@ -55,7 +58,8 @@ namespace Wrapper.ApiApp.Clients
         /// <inheritdoc/>
         public Task<PowerState> GetAsync(string name)
         {
-            var result = new PowerState() { Code = PowerStateCode.Running };
+            var code = random.Next(100) % 2;
+            var result = new PowerState() { Code = (PowerStateCode)code };
 
             return Task.FromResult(result);
         }
