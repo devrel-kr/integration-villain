@@ -30,7 +30,7 @@ $ kubectl apply -f complete-demo.yaml
 
 ```bash
 $ HTTP_APP_ROUTING_HOST=$(az aks show -g [RESOURCE_GROUP_NAME] -n [RESOURCE_NAME_AKS] --query addonProfiles.httpApplicationRouting.config.HTTPApplicationRoutingZoneName -o tsv)
-cat aks-expose-app-routing.yaml | sed -e "s/CLUSTER_SPECIFIC_DNS_ZONE/$HTTP_APP_ROUTING_HOST/" | kubectlapply -f -
+cat aks-expose-app-routing.yaml | sed -e "s/CLUSTER_SPECIFIC_DNS_ZONE/$HTTP_APP_ROUTING_HOST/" | kubectl apply -f -
 ```
 
 5. sock-shop 앱을 웹 브라우저에서 확인
