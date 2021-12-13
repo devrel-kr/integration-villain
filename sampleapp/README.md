@@ -38,3 +38,13 @@ cat aks-expose-app-routing.yaml | sed -e "s/CLUSTER_SPECIFIC_DNS_ZONE/$HTTP_APP_
 ```bash
 cat aks-expose-app-routing.yaml | sed -e "s/CLUSTER_SPECIFIC_DNS_ZONE/$HTTP_APP_ROUTING_HOST/" | grep host | awk '{print "http://"$3}'
 ```
+
+6. 다음 작업은 이후 `monitorapp`에서 API 액세스할 때 사용하기 위한 토큰 값을 얻는 과정입니다. 모니터링에 사용할 쿠버네티스 SA 계정을 만들고 role-binding을 수행합니다.
+```bash
+NICK=villain
+kubectl -n sock-shop create sa $NICK
+
+cat aks-role-binding.yaml | sed -e "s/NICK/$NICK/" |kubectl create -f -
+TOKEN=`kubectl get secrets -n sock-shop $(kubectl get sa -n sock-shop $NICK -o jsonpath="{.secrets[0].name}") -o jsonpath="{.data.token}" | base64 -d`
+echo $TOKEN
+```
