@@ -1,0 +1,9 @@
+{
+  "IsEncrypted": false,
+  "Values": {
+    "AzureWebJobsStorage": "",
+    "FUNCTIONS_WORKER_RUNTIME": "python",
+    "AKSTokenFromKeyVault": "AKS_TOKEN_FROM_KEYVAULT",
+    "AKSAPIURL": "https://AKS_API_URL"
+  }
+}
