@@ -11,6 +11,7 @@ AKS 애플리케이션 상태를 모니터링하는 앱이 들어가는 디렉�
 
 3. `(optional)` 가져온 $TOKEN으로 액세스가 잘 되는지 테스트
 - `[AKS_API_URL]` 값은 생성한 AKS 리소스에 대해 Azure Portal에서 접근하여 확인 가능합니다.
+![aks api url check](assets/01-aks-api-url-check.png)
 
 ```bash
 $ APIADDR=[AKS_API_URL]
@@ -22,6 +23,8 @@ $ curl -k -H "Authorization: Bearer $TOKEN" https://$APIADDR/api/v1/namespaces/s
 - 시크릿 값: (위에서 얻은 $TOKEN 값을 사용합니다)
 
 5. Azure Portal에서 생성한 시크릿을 클릭 후, 현재 버전(CURRENT VERSION)을 클릭하면 `Secret Identifier`가 있습니다. 이를 클립보드에 복사하여 아래 설정에서 활용합니다.
+![see-secret-identifier](assets/02-see-secret-identifier.png)
+
 ## Function App을 배포 후 Key Vault를 통해 AKS Token에 액세스하도록 설정
 
 1. 새 Azure Function App을 만듭니다. `Python 3.8`을 선택합니다.
@@ -42,6 +45,9 @@ $ curl -k -H "Authorization: Bearer $TOKEN" https://$APIADDR/api/v1/namespaces/s
 
 - ``AKSAPIURL``: "https://"를 앞에 붙여 AKS API URL 값을 저장 (예: "https://[AKS API URL]")
 - ``AKSTokenFromKeyVault``: `@Microsoft.KeyVault(SecretUri=[SECRET_IDENTIFIER])`
+
+![azure-function-app-configuration](assets/03-azure-function-app-configuration.png)
+
 
 5. `구성(Settings) -> ID(Identity)`에서 상태(Status)가 Off되어 있는 부분을 *On*으로 바꾸고 저장합니다.
 

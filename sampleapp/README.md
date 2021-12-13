@@ -17,6 +17,7 @@ AKS에 올라가는 샘플 애플리케이션을 저장하는 디렉토리입니
 ```
 $ az aks get-credentials -g [RESOURCE_GROUP_NAME] -n [RESOURCE_NAME_AKS]
 ```
+![az aks get-credentials](assets/01-get-credentials.png)
 
 3. Sock-shop 앱을 AKS에 배포
 ```
@@ -38,6 +39,7 @@ cat aks-expose-app-routing.yaml | sed -e "s/CLUSTER_SPECIFIC_DNS_ZONE/$HTTP_APP_
 ```bash
 cat aks-expose-app-routing.yaml | sed -e "s/CLUSTER_SPECIFIC_DNS_ZONE/$HTTP_APP_ROUTING_HOST/" | grep host | awk '{print "http://"$3}'
 ```
+![get and test http url](assets/02-expose-app-routing-http-url.png)
 
 6. 다음 작업은 이후 `monitorapp`에서 API 액세스할 때 사용하기 위한 토큰 값을 얻는 과정입니다. 모니터링에 사용할 쿠버네티스 SA 계정을 만들고 role-binding을 수행합니다.
 ```bash
