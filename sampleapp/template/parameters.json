@@ -1,0 +1,48 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "subscriptionId": {
+            "value": "891774a2-e890-4a46-a922-956fc33d5e82"
+        },
+        "name": {
+            "value": "integrationvillain-monitorappfunc"
+        },
+        "location": {
+            "value": "West US 2"
+        },
+        "hostingPlanName": {
+            "value": "ASP-rgintegrationvillainkrc-af3c"
+        },
+        "serverFarmResourceGroup": {
+            "value": "rg-integrationvillain-krc"
+        },
+        "alwaysOn": {
+            "value": false
+        },
+        "use32BitWorkerProcess": {
+            "value": false
+        },
+        "storageAccountName": {
+            "value": "storageaccountrgint829f"
+        },
+        "linuxFxVersion": {
+            "value": "Python|3.8"
+        },
+        "sku": {
+            "value": "Dynamic"
+        },
+        "skuCode": {
+            "value": "Y1"
+        },
+        "workerSize": {
+            "value": "0"
+        },
+        "workerSizeId": {
+            "value": "0"
+        },
+        "numberOfWorkers": {
+            "value": "1"
+        }
+    }
+}
