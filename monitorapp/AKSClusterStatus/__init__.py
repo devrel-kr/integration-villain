@@ -23,14 +23,27 @@ def main(req: func.HttpRequest) -> func.HttpResponse:
             name = req_body.get('name')
 
     if name:
-        #return func.HttpResponse(f"Hello, {name}. This HTTP triggered function executed successfully.")
-
+        # Call a Kubernetes API Request with address from App configuration and token from Azure Key Vault
         hed = {'Authorization': 'Bearer ' + aks_token}
-        api_url_request = api_url + '/api/v1/namespaces/' + name + '/services/'
+        api_url_request = api_url + '/api/v1/namespaces/' + name
+        # TO-DO: On production, deleting "verify=False" option is needed
         api_url_response = requests.get(api_url_request, headers=hed, verify=False)  
 
-        logging.info('Getting AKS cluster status through services API')
+        logging.info('Getting AKS cluster status through namespaces API')
 
+        # api_url_response.json() data should be like the following JSON with status_code 200
+        # if name matches:
+        # JSON:
+        #   {
+        #     "kind": "Namespace",
+        #     "apiVersion": "v1",
+        #     "metadata": {
+        #       "name": "sock-shop"
+        #     }
+        #   }
+        # If name does not match, then it api_url_response.status_code should be 404
+
+        logging.info('AKS cluster API - status code' + str(api_url_response.status_code) )
         if api_url_response.status_code == 200:
             return func.HttpResponse(
                 json.dumps({
