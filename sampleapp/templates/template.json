@@ -1,0 +1,150 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "resourceName": {
+            "type": "String",
+            "metadata": {
+                "description": "관리 클러스터 리소스의 이름입니다."
+            }
+        },
+        "location": {
+            "type": "String",
+            "metadata": {
+                "description": "AKS 리소스의 위치입니다."
+            }
+        },
+        "dnsPrefix": {
+            "type": "String",
+            "metadata": {
+                "description": "호스트된 Kubernetes API 서버 FQDN에서 사용할 선택적 DNS 접두사입니다."
+            }
+        },
+        "osDiskSizeGB": {
+            "defaultValue": 0,
+            "minValue": 0,
+            "maxValue": 1023,
+            "type": "Int",
+            "metadata": {
+                "description": "각 에이전트 풀 노드에 대해 프로비저닝할 디스크 크기(GiB)입니다. 이 값의 범위는 0~1023입니다. 0을 지정하면 해당 agentVMSize에 기본 디스크 크기가 적용됩니다."
+            }
+        },
+        "kubernetesVersion": {
+            "defaultValue": "1.7.7",
+            "type": "String",
+            "metadata": {
+                "description": "Kubernetes의 버전입니다."
+            }
+        },
+        "networkPlugin": {
+            "allowedValues": [
+                "azure",
+                "kubenet"
+            ],
+            "type": "String",
+            "metadata": {
+                "description": "Kubernetes 네트워크 빌드에 사용되는 네트워크 플러그인입니다."
+            }
+        },
+        "enableRBAC": {
+            "defaultValue": true,
+            "type": "Bool",
+            "metadata": {
+                "description": "RBAC를 켜고 끄는 부울 플래그입니다."
+            }
+        },
+        "vmssNodePool": {
+            "defaultValue": false,
+            "type": "Bool",
+            "metadata": {
+                "description": "가상 머신 확장 집합을 켜고 끄는 부울 플래그"
+            }
+        },
+        "windowsProfile": {
+            "defaultValue": false,
+            "type": "Bool",
+            "metadata": {
+                "description": "가상 머신 확장 집합을 켜고 끄는 부울 플래그"
+            }
+        },
+        "enablePrivateCluster": {
+            "defaultValue": false,
+            "type": "Bool",
+            "metadata": {
+                "description": "Kubernetes 클러스터에 대한 프라이빗 네트워크 액세스를 사용하도록 설정합니다."
+            }
+        },
+        "enableHttpApplicationRouting": {
+            "defaultValue": true,
+            "type": "Bool",
+            "metadata": {
+                "description": "http 애플리케이션 라우팅을 켜고 끄는 부울 플래그입니다."
+            }
+        },
+        "enableAzurePolicy": {
+            "defaultValue": false,
+            "type": "Bool",
+            "metadata": {
+                "description": "Azure Policy 추가 기능을 켜고 끄는 부울 플래그입니다."
+            }
+        }
+    },
+    "resources": [
+        {
+            "type": "Microsoft.ContainerService/managedClusters",
+            "apiVersion": "2021-07-01",
+            "name": "[parameters('resourceName')]",
+            "location": "[parameters('location')]",
+            "dependsOn": [],
+            "tags": {},
+            "identity": {
+                "type": "SystemAssigned"
+            },
+            "properties": {
+                "kubernetesVersion": "[parameters('kubernetesVersion')]",
+                "enableRBAC": "[parameters('enableRBAC')]",
+                "dnsPrefix": "[parameters('dnsPrefix')]",
+                "agentPoolProfiles": [
+                    {
+                        "name": "agentpool",
+                        "osDiskSizeGB": "[parameters('osDiskSizeGB')]",
+                        "count": 3,
+                        "enableAutoScaling": true,
+                        "minCount": 1,
+                        "maxCount": 3,
+                        "vmSize": "Standard_B4ms",
+                        "osType": "Linux",
+                        "storageProfile": "ManagedDisks",
+                        "type": "VirtualMachineScaleSets",
+                        "mode": "System",
+                        "maxPods": 110,
+                        "availabilityZones": [],
+                        "enableNodePublicIP": false,
+                        "tags": {}
+                    }
+                ],
+                "networkProfile": {
+                    "loadBalancerSku": "standard",
+                    "networkPlugin": "[parameters('networkPlugin')]"
+                },
+                "apiServerAccessProfile": {
+                    "enablePrivateCluster": "[parameters('enablePrivateCluster')]"
+                },
+                "addonProfiles": {
+                    "httpApplicationRouting": {
+                        "enabled": "[parameters('enableHttpApplicationRouting')]"
+                    },
+                    "azurepolicy": {
+                        "enabled": "[parameters('enableAzurePolicy')]"
+                    }
+                }
+            }
+        }
+    ],
+    "outputs": {
+        "controlPlaneFQDN": {
+            "type": "String",
+            "value": "[reference(concat('Microsoft.ContainerService/managedClusters/', parameters('resourceName'))).fqdn]"
+        }
+    }
+}
