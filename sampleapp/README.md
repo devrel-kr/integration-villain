@@ -8,7 +8,7 @@ AKS에 올라가는 샘플 애플리케이션을 배포합니다.
 
 ## AKS 매니지드 클러스터 생성 ##
 
-1. 아래 애저 CLI 명령어를 이용해서 AKS 매니지드 클러스터 리소스를 생성합니다.
+1. 아래 [애저 CLI](https://docs.microsoft.com/ko-kr/cli/azure/what-is-azure-cli?WT.mc_id=dotnet-52121-juyoo&ocid=AID3035186) 명령어를 이용해서 AKS 매니지드 클러스터 리소스를 생성합니다.
 
     ```bash
     RESOURCE_GROUP=<리소스그룹 이름>

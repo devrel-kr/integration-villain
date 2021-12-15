@@ -19,7 +19,7 @@ AKS 매니지드 클러스터의 상태를 모니터링하는 애저 펑션 앱�
 
     ![see-secret-identifier](assets/02-see-secret-identifier.png)
 
-5. 또는 애저 CLI 명령어를 사용해서 가져올 수도 있습니다.
+5. 또는 [애저 CLI](https://docs.microsoft.com/ko-kr/cli/azure/what-is-azure-cli?WT.mc_id=dotnet-52121-juyoo&ocid=AID3035186) 명령어를 사용해서 가져올 수도 있습니다.
 
     ```bash
     KV_NAME=<키 저장소 이름>

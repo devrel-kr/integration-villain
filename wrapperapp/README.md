@@ -2,6 +2,8 @@
 
 팀즈에 사용하는 모니터링용 대시보드 앱을 배포합니다.
 
+아래 내용은 [애저 클라우드 셸](https://shell.azure.com?WT.mc_id=dotnet-52121-juyoo&ocid=AID3035186)을 통해 실행할 수 있습니다. bash Shell 환경을 기준으로 설명합니다.
+
 
 ## 리포지토리 포크 ##
 
@@ -10,13 +12,13 @@
 
 ## 대시보드 앱 배포 ##
 
-1. 우선 GitHub에 아래 명령어와 같이 GitHub CLI를 이용해 로그인 합니다.
+1. 우선 GitHub에 아래 명령어와 같이 [GitHub CLI](https://github.com/cli/cli)를 이용해 로그인 합니다.
 
     ```bash
     gh auth login
     ```
 
-2. 아래 애저 CLI 명령어를 이용해 앱을 배포해 보세요. 배포에는 [애저 Bicep](https://docs.microsoft.com/ko-kr/azure/azure-resource-manager/bicep/overview?WT.mc_id=dotnet-52121-juyoo&ocid=AID3035186) 파일을 사용합니다.
+2. 아래 [애저 CLI](https://docs.microsoft.com/ko-kr/cli/azure/what-is-azure-cli?WT.mc_id=dotnet-52121-juyoo&ocid=AID3035186) 명령어를 이용해 앱을 배포해 보세요. 배포에는 [애저 Bicep](https://docs.microsoft.com/ko-kr/azure/azure-resource-manager/bicep/overview?WT.mc_id=dotnet-52121-juyoo&ocid=AID3035186) 파일을 사용합니다.
 
     ```bash
     ASWA_NAME=<애저 정적 웹 앱 이름>
