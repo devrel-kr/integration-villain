@@ -19,6 +19,18 @@ AKS 매니지드 클러스터의 상태를 모니터링하는 애저 펑션 앱�
 
     ![see-secret-identifier](assets/02-see-secret-identifier.png)
 
+5. 또는 애저 CLI 명령어를 사용해서 가져올 수도 있습니다.
+
+    ```bash
+    KV_NAME=<키 저장소 이름>
+    KV_SECRET_NAME=AKSTokenFromKeyVault
+    KV_SECRET_ID=$(az keyvault secret show \
+        --vault-name $KV_NAME \
+        -n $KV_SECRET_NAME \
+        --query "id" \
+        -o tsv)
+    ```
+
 
 ## 애저 펑션 앱 배포 및 Key Vault 연동 ##
 
@@ -47,7 +59,7 @@ AKS 매니지드 클러스터의 상태를 모니터링하는 애저 펑션 앱�
         --parameters hostingPlanName=$HOSTINGPLAN_NAME \
         --parameters storageAccountName=$STORAGE_NAME \
         --parameters aksApiUrl=https://$AKS_API_URL \
-        --parameters aksApiToken=$TOKEN \
+        --parameters aksApiToken="@Microsoft.KeyVault(SecretUri=$KV_SECRET_ID)" \
         --verbose
     ```
 
