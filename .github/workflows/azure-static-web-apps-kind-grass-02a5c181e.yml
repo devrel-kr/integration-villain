@@ -23,5 +23,5 @@ jobs:
       api_location: "wrapperapp/Wrapper.ApiApp"
       output_location: "wwwroot"
     secrets:
-      github_token: ${{ secrets.GITHUB_TOKEN }}
+      gha_token: ${{ secrets.GITHUB_TOKEN }}
       aswa_token: ${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN_KIND_GRASS_02A5C181E }}
