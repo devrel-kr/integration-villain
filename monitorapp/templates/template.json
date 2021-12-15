@@ -2,9 +2,6 @@
     "$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
     "contentVersion": "1.0.0.0",
     "parameters": {
-        "subscriptionId": {
-            "type": "String"
-        },
         "name": {
             "type": "String"
         },
@@ -13,12 +10,6 @@
         },
         "hostingPlanName": {
             "type": "String"
-        },
-        "serverFarmResourceGroup": {
-            "type": "String"
-        },
-        "alwaysOn": {
-            "type": "Bool"
         },
         "use32BitWorkerProcess": {
             "type": "Bool"
@@ -43,6 +34,12 @@
         },
         "numberOfWorkers": {
             "type": "String"
+        },
+        "aksApiUrl": {
+            "type": "String"
+        },
+        "aksApiToken": {
+            "type": "SecureString"
         }
     },
     "variables": {},
@@ -58,6 +55,9 @@
             ],
             "tags": {},
             "kind": "functionapp,linux",
+            "identity": {
+              "type": "SystemAssigned"
+            },
             "properties": {
                 "name": "[parameters('name')]",
                 "siteConfig": {
@@ -73,6 +73,14 @@
                         {
                             "name": "AzureWebJobsStorage",
                             "value": "[concat('DefaultEndpointsProtocol=https;AccountName=',parameters('storageAccountName'),';AccountKey=',listKeys(resourceId('Microsoft.Storage/storageAccounts', parameters('storageAccountName')), '2019-06-01').keys[0].value,';EndpointSuffix=','core.windows.net')]"
+                        },
+                        {
+                            "name": "AKSAPIURL",
+                            "value": "[parameters('aksApiUrl')]"
+                        },
+                        {
+                            "name": "AKSTokenFromKeyVault",
+                            "value": "[parameters('aksApiToken')]"
                         }
                     ],
                     "cors": {
@@ -83,7 +91,7 @@
                     "use32BitWorkerProcess": "[parameters('use32BitWorkerProcess')]",
                     "linuxFxVersion": "[parameters('linuxFxVersion')]"
                 },
-                "serverFarmId": "[concat('/subscriptions/', parameters('subscriptionId'),'/resourcegroups/', parameters('serverFarmResourceGroup'), '/providers/Microsoft.Web/serverfarms/', parameters('hostingPlanName'))]",
+                "serverFarmId": "[concat('/subscriptions/', subscription().subscriptionId, '/resourcegroups/', resourceGroup().name, '/providers/Microsoft.Web/serverfarms/', parameters('hostingPlanName'))]",
                 "clientAffinityEnabled": false
             }
         },

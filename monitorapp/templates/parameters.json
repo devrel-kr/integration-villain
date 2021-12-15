@@ -2,9 +2,6 @@
     "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
     "contentVersion": "1.0.0.0",
     "parameters": {
-        "subscriptionId": {
-            "value": "891774a2-e890-4a46-a922-956fc33d5e82"
-        },
         "name": {
             "value": "integrationvillain-monitorappfunc"
         },
@@ -13,12 +10,6 @@
         },
         "hostingPlanName": {
             "value": "ASP-rgintegrationvillainkrc-af3c"
-        },
-        "serverFarmResourceGroup": {
-            "value": "rg-integrationvillain-krc"
-        },
-        "alwaysOn": {
-            "value": false
         },
         "use32BitWorkerProcess": {
             "value": false
@@ -43,6 +34,9 @@
         },
         "numberOfWorkers": {
             "value": "1"
+        },
+        "aksApiUrl": {
+            "value": "https://aks_api_url"
         }
     }
 }
