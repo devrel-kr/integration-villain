@@ -19,3 +19,6 @@ indent_size = 2
 
 [*.{html,css,scss,less,sass,js,jsx,ts,tsx}]
 indent_size = 2
+
+[*.{bicep}]
+indent_size = 2

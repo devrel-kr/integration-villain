@@ -36,7 +36,10 @@
         --verbose
     ```
 
-> 만약 `yq` 명령어가 동작하지 않으면 아래 작업을 먼저 수행해 주세요.
-> 1. `pip3 install yq` 명령어로 `yq` 설치
-> 2. `yq` 설치 후 `export PATH=$PATH:$HOME/.local/bin` 명령으로 경로 등록해 주세요.
+    > 만약 `yq` 명령어가 동작하지 않으면 아래 작업을 먼저 수행해 주세요.
+    > 1. `pip3 install yq` 명령어로 `yq` 설치
+    > 2. `yq` 설치 후 `export PATH=$PATH:$HOME/.local/bin` 명령으로 경로 등록해 주세요.
 
+3. 대시보드 앱 배포 이후 설정 창에서 Application Settings 값을 아래와 같이 추가합니다.
+   * Name: `Monitoring__BaseUrl`
+   * Value: [모니터용 애저 펑션 앱 URL]
