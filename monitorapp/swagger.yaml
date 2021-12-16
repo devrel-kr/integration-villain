@@ -1,9 +1,9 @@
 swagger: '2.0'
 info:
-  title: integration-villain-monitorapp-openapi
+  title: Integration Villain Monitoring App
   description: Integration Villain project - monitorapp Open API
   version: v1
-host: DRAFT-integration-villain-monitorapp-openapi.azurewebsites.net
+host: fncapp-integrationvillain-wus2.azurewebsites.net
 schemes:
   - https
 consumes:
@@ -11,7 +11,7 @@ consumes:
 produces:
   - application/json
 paths:
-  /api/AKSClusterStatus/{name}:
+  /api/AKSClusterStatus:
     get:
       tags:
         - AKSClusterStatus
@@ -23,12 +23,12 @@ paths:
         '200':
           description: OK
           schema:
-            $ref: '#/definitions/PowerState'
+            $ref: '#/definitions/PowerStateResponse'
 definitions:
-  PowerState:
+  PowerStateResponse:
     description: Describes the Power State of the cluster
     properties:
-      code:
+      powerState:
         type: string
         description: Tells whether the cluster is Running or Stopped
         enum:
@@ -45,7 +45,7 @@ definitions:
 parameters:
   AKSClusterNameParameter:
     name: name
-    in: path
+    in: query
     required: true
     type: string
     minLength: 1

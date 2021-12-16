@@ -9,6 +9,15 @@ builder.RootComponents.Add<App>("#app");
 builder.RootComponents.Add<HeadOutlet>("head::after");
 
 builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri(builder.HostEnvironment.BaseAddress) });
-builder.Services.AddScoped<IProxyClient>(sp => new ProxyClient(sp.GetService<HttpClient>()) { BaseUrl = $"{builder.HostEnvironment.BaseAddress}/api" });
+builder.Services.AddScoped<IProxyClient>(sp =>
+{
+    var client = new ProxyClient(sp.GetService<HttpClient>());
+    if (!builder.HostEnvironment.IsDevelopment())
+    {
+        client.BaseUrl = $"{builder.HostEnvironment.BaseAddress.TrimEnd('/')}/api";
+    }
+
+    return client;
+});
 
 await builder.Build().RunAsync();

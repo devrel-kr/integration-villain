@@ -20,9 +20,10 @@ namespace Wrapper.ApiApp
         {
             builder.Services.AddHttpClient();
 
-            builder.Services.AddSingleton<IMonitorClient>(p =>
+            builder.Services.AddTransient<IMonitorClient>(p =>
             {
-                var monitor = new FakeMonitorClient(p.GetService<HttpClient>())
+                //var monitor = new FakeMonitorClient(p.GetService<HttpClient>())
+                var monitor = new MonitorClient(p.GetService<HttpClient>())
                 {
                     BaseUrl = Environment.GetEnvironmentVariable("Monitoring__BaseUrl")
                 };

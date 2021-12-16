@@ -24,7 +24,7 @@ namespace Wrapper.ApiApp.Clients
         /// </summary>
         /// <param name="name">AKS cluster name.</param>
         /// <returns>Returns the <see cref="PowerState"/> value.</returns>
-        Task<PowerState> GetAsync(string name);
+        Task<PowerStateResponse> GetAsync(string name);
     }
 
     /// <summary>
@@ -56,10 +56,10 @@ namespace Wrapper.ApiApp.Clients
         public bool ReadResponseAsString { get; set; }
 
         /// <inheritdoc/>
-        public Task<PowerState> GetAsync(string name)
+        public Task<PowerStateResponse> GetAsync(string name)
         {
             var code = random.Next(100) % 2;
-            var result = new PowerState() { Code = (PowerStateCode)code };
+            var result = new PowerStateResponse() { PowerState = (PowerStateResponsePowerState)code };
 
             return Task.FromResult(result);
         }

@@ -41,7 +41,7 @@ namespace Wrapper.ApiApp
         /// </summary>
         /// <param name="req"><see cref="HttpRequest"/> instance.</param>
         /// <param name="name">AKS cluster name.</param>
-        /// <returns>Returns the <see cref="PowerState"/> value.</returns>
+        /// <returns>Returns the <see cref="MonitorResponse"/> value.</returns>
         [FunctionName(nameof(MonitorHttpTrigger.GetStatusAsync))]
         [OpenApiOperation(operationId: "Status.Get", tags: new[] { "status" })]
         [OpenApiParameter(name: "name", In = ParameterLocation.Path, Required = true, Type = typeof(string), Description = "The **Name** parameter")]
@@ -53,7 +53,7 @@ namespace Wrapper.ApiApp
             this._logger.LogInformation("C# HTTP trigger function processed a request.");
 
             var result = await this._monitor.GetAsync(name).ConfigureAwait(false);
-            var res = new MonitorResponse() { Name = name, PowerState = result.Code.ToString() };
+            var res = new MonitorResponse() { Name = name, PowerState = result.PowerState.ToString() };
 
             return new OkObjectResult(res);
         }
